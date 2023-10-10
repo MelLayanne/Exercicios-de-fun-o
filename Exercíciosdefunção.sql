@@ -41,3 +41,22 @@ SELECT produto, ABS(quantidade) AS quantidade_abs FROM produtos;
 
 SELECT AVG(preco) AS mediapreco FROM produtos;
 
+--3. Funções de Data:
+
+CREATE TABLE eventos (
+  data_evento DATE
+);
+
+INSERT INTO eventos (data_evento) VALUES
+    ('2006-06-29 '),
+    ('2005-07-24 ');
+
+INSERT INTO eventos (data_evento)
+VALUES (NOW());
+
+
+SELECT DATEDIFF('2006-06-29', '2005-07-24') AS diasdatas;
+
+
+SELECT DAYNAME(data_evento) AS diasemana
+FROM eventos;
