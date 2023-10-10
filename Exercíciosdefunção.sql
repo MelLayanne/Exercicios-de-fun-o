@@ -78,6 +78,24 @@ SELECT
     END AS catpreco
 FROM produtos;
 
+--5. Função Personalizada
+
+DELIMITER //
+
+CREATE FUNCTION TOTAL_VALOR (PRECO DECIMAL(10,2), QUANTIDADE INT) 
+RETURNS DECIMAL(10,2) 
+DETERMINISTIC
+BEGIN 
+    DECLARE total_valor DECIMAL(10,2);   
+    SET total_valor = PRECO * QUANTIDADE;   
+    RETURN total_valor; 
+END;
+
+//
+
+DELIMITER ;
+
+SELECT produto, TOTAL_VALOR(preco, quantidade) AS valortotal FROM produtos;
 
 
 
