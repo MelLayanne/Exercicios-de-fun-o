@@ -60,3 +60,26 @@ SELECT DATEDIFF('2006-06-29', '2005-07-24') AS diasdatas;
 
 SELECT DAYNAME(data_evento) AS diasemana
 FROM eventos;
+
+--4. Funções de Controle de Fluxo:
+
+SELECT
+    produto,
+    quantidade,
+    IF(quantidade > 0, 'Em estoque', 'Fora de estoque') AS estoque
+FROM produtos;
+
+SELECT
+    produto,
+    CASE
+        WHEN preco < 20 THEN 'Barato'
+        WHEN preco >= 20 AND preco <= 50 THEN 'Médio'
+        ELSE 'Caro'
+    END AS catpreco
+FROM produtos;
+
+
+
+
+
+
