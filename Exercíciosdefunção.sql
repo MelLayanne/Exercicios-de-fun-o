@@ -107,6 +107,83 @@ SELECT produto, preco FROM produtos WHERE preco = (SELECT MIN(preco) FROM produt
 
 SELECT SUM(IF(quantidade > 0, preco * quantidade, 0)) AS valoremestoque FROM produtos;
 
+--7. Criando funções:
+DELIMITER //
+
+CREATE FUNCTION Fatorial(n INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE result INT DEFAULT 1;
+    DECLARE m INT DEFAULT 1;
+    
+    WHILE m <= n DO
+        SET result = result * m;
+        SET m = m + 1;
+    END WHILE;
+    
+    RETURN result;
+END;
+
+//
+
+DELIMITER ;
+
+SELECT Fatorial(7);
+SELECT Fatorial(2);
+
+DELIMITER //
+
+CREATE FUNCTION Exponencial(base DECIMAL, expoente INT)
+RETURNS DECIMAL
+DETERMINISTIC
+BEGIN
+    DECLARE resultado DECIMAL DEFAULT 1;
+    DECLARE num INT DEFAULT 1;
+    
+    WHILE num <= expoente DO
+        SET resultado = resultado * base;
+        SET num = num + 1;
+    END WHILE;
+    
+    RETURN resultado;
+END;
+
+//
+
+DELIMITER ;
+
+SELECT Exponencial(4,8);
+SELECT Exponencial(10,7);
+
+
+DELIMITER //
+CREATE FUNCTION Palindromo(palavra VARCHAR(255)) RETURNS INT
+DETERMINISTIC
+BEGIN
+  DECLARE tamanho INT;
+  DECLARE pa INT;
+  
+  SET tamanho = LENGTH(palavra);
+  SET pa = 1;
+  
+  WHILE pa <= tamanho/2 DO
+    IF SUBSTRING(palavra, pa, 1) != SUBSTRING(palavra, tamanho - pa + 1, 1) THEN
+      RETURN 0;
+    END IF;
+    
+    SET pa = pa + 1;
+  END WHILE;
+  
+  RETURN 1;
+END;
+//
+DELIMITER ;
+
+SELECT Palindromo('Escola'); 
+SELECT Palindromo('Arara');
+
+
 
 
 
